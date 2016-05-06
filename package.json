@@ -22,10 +22,6 @@
   },
   "homepage": "https://github.com/futurize/future-io#readme",
   "standard": {
-    "rules": {
-      "arrow-parens": 0,
-      "babel/arrow-parens": 0
-    },
     "parser": "babel-eslint"
   },
   "dependencies": {
