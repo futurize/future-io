@@ -40,6 +40,8 @@ For some recipes demonstrating their use check out the examples directory.
 
 ### `future-io/node/process`
 
+### `future-io/node/child_process`
+
 ## performing IO actions
 
 ### `unsafePerform :: IO e a -> ()`
