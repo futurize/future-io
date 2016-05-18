@@ -102,7 +102,7 @@ This action is passed an `ioError`, if one exists, in the first-argument positio
 ## Example using [ava](https://github.com/sindresorhus/ava) and async/await
 ```js
 import test from 'ava'
-import io from 'future-io'
+import {fakePerform} from 'future-io'
 import ioProcess from 'future-io/node/process'
 
 test('logging the current working directory', async t => {
@@ -125,7 +125,7 @@ test('logging the current working directory', async t => {
 ## Example using [mocha](https://github.com/sindresorhus/ava) and [co](https://github.com/tj/co)
 ```js
 import co from 'co'
-import io from 'future-io'
+import {fakePerform} from 'future-io'
 import assert from 'assert'
 
 it('logs the current working directory', co.wrap(function* () {
