@@ -126,6 +126,7 @@ test('logging the current working directory', async t => {
 ```js
 import co from 'co'
 import io from 'future-io'
+import ioProcess from 'future-io/node/process'
 import assert from 'assert'
 
 it('logs the current working directory', co.wrap(function* () {
