@@ -37,7 +37,7 @@
     "ava": "^0.15.0",
     "babel-eslint": "^6.0.4",
     "co": "^4.6.0",
-    "fantasy-land": "^0.2.1",
+    "fantasy-land": "^0.3.0",
     "npm-run-all": "^2.0.0",
     "nyc": "^7.0.0",
     "standard": "^7.0.1",
