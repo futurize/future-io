@@ -40,7 +40,7 @@
     "fantasy-land": "^0.3.0",
     "npm-run-all": "^3.0.0",
     "nyc": "^8.0.0",
-    "standard": "^7.0.1",
+    "standard": "^8.0.0",
     "xyz": "^1.0.0"
   }
 }
