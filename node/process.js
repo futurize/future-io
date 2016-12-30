@@ -1,28 +1,45 @@
-const wrapFunction = require('../lib/wrap-function')
+const _wrapFunction = require('../lib/wrap-function')
 
-exports.stdout = {}
-exports.stdout.write = wrapFunction(
+function create (Task, methods) {
+
+var wrapFunction = Task ? _wrapFunction.create(Task, methods) : _wrapFunction;
+
+var stdout = {}
+stdout.write = wrapFunction(
   'process.stdout.write',
   process.stdout.write.bind(process.stdout)
 )
 
-exports.stderr = {}
-exports.stderr.write = wrapFunction(
+var stderr = {}
+stderr.write = wrapFunction(
   'process.stderr.write',
   process.stderr.write.bind(process.stderr)
 )
 
-exports.argv = wrapFunction(
+var argv = wrapFunction(
   'process.argv',
   () => process.argv
 )()
 
-exports.exit = wrapFunction(
+var exit = wrapFunction(
   'process.exit',
   process.exit
 )
 
-exports.cwd = wrapFunction(
+var cwd = wrapFunction(
   'process.cwd',
   process.cwd
 )
+
+return {
+  stdout : stdout,
+  stderr : stderr,
+  argv : argv,
+  exit : exit,
+  cwd : cwd
+}
+
+}
+
+module.exports = create()
+module.exports.create = create

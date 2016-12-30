@@ -3,6 +3,10 @@ import IO from '../lib/io'
 import ioProcess from '../node/process'
 import fakePerform from '../lib/fake-perform'
 
+import Task from 'fluture'
+import lib from '../lib'
+
+
 test('happy flow', async (t) => {
   const io = ioProcess.cwd().chain(ioProcess.stdout.write)
   const { put, take } = fakePerform(io)
@@ -79,6 +83,33 @@ test('catching an io error', async (t) => {
     .catch((error) => IO.of(error.message))
     .chain(ioProcess.stdout.write)
   const { put, error, take } = fakePerform(io)
+
+  await take('process.cwd')
+  const cwdError = new Error('cwd failed')
+  error(cwdError)
+
+  const [ loggedString ] = await take('process.stdout.write')
+  t.is(loggedString, cwdError.message)
+  put()
+
+  const [ ioError ] = await take('end')
+  t.falsy(ioError)
+})
+
+
+test('catching an io error with custom Task', async (t) => {
+
+  var methodMap = { of: 'of', rejected: 'reject', orElse: 'chainRej' }
+  var libCustomTask = lib.create(Task, methodMap)
+
+  var fakePerformCustomTask = libCustomTask.fakePerform
+  var IOCustomTask = libCustomTask.IO
+  var ioProcessCustomTask = ioProcess.create(Task, methodMap)
+
+  const io = ioProcessCustomTask.cwd()
+    .catch((error) => IOCustomTask.of(error.message))
+    .chain(ioProcessCustomTask.stdout.write)
+  const { put, error, take } = fakePerformCustomTask(io)
 
   await take('process.cwd')
   const cwdError = new Error('cwd failed')
